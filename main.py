@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 
 from settings import Config
 from providers import R2Client, DropboxClient
-from utils import FileMetadata, save_metadata, gen_key
+from utils import FileMetadata, FileMetadataWithUrl, save_metadata, load_metadata, gen_key
 
 config = Config()
 r2 = R2Client(config)
@@ -24,6 +24,21 @@ def get_upload_presigned_url():
 def upload_ack(metadata: FileMetadata):
     save_metadata(metadata)
     return {"success": True}
+
+@app.get("/folders/{folder}/files")
+def list_files(folder: str) -> list[FileMetadataWithUrl]:
+    md = load_metadata()
+    res: list[FileMetadataWithUrl] = []
+    for row in md:
+        key = row["id"]
+        url = dbx.get_view_presigned_url(key)
+        res.append(FileMetadataWithUrl(
+            id=key,
+            file_type=row["file_type"],
+            display_name=row["display_name"],
+            url=url
+        ))
+    return res
 
 
 app.mount("/", StaticFiles(directory="static"), name="static")

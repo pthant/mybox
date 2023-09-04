@@ -7,6 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyBox</title>
     <link rel="stylesheet" href="reset.css">
+    <style>
+        #grid {
+            background-color: beige;
+            display: grid;
+            width: 180px;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .file>p {
+            font-size: small;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,6 +26,27 @@
         <input type="file" id="file"></input>
         <button type="submit">Upload</button>
     </form>
+
+    <button type="button" id="show" onclick="showHandler()">Show</button>
+    <div id="grid">
+        <!-- <div class="file">
+            <img src="https://uc656d2baba7ad163d267aceeec6.dl.dropboxusercontent.com/cd/0/get/CDH7-w9Qcx39JOJNlDWP0ygLqqa3w7mTmSxzUrAk0MkqDf02ya-FWTVt9_MWkyY00dLqtZbP8wHnGL3DYm1JwXGR1tpWAqzQY7DXgLlffWHQ5U8Jo7aVZOtutfQEwLiGRYQT7RDRQul9OG68sw3n6RmXe9ZwifQwscxA7ROqfznbvhiv1KHXV4eEOmHBDGxgi0Y/file">
+            <p>img1.png</p>
+        </div>
+        <div class="file">
+            <img src="https://uc5cb94bfd2b4fa76e03a9afa96b.dl.dropboxusercontent.com/cd/0/get/CDF7qT_YMuJyezCVGzaDkDB6TRjqa_CA3Mptd-VDxE9YiqN0cFD96m-HzCS-xkA_kLPD8wDG-pwhTWGvidlSBHLWQummQOvZ_--uuLXZkipXEDIxlk2MazZ_19jKByks7UYiht1pvrs9aIOATZf-vMpI2EwTxNkwN48PLmlf84PjneRQEHJTpKYHil6zhURtX8w/file">
+            <p>img2.png</p>
+        </div>
+        <div class="file">
+            <img src="https://uc11ccd4cd4c8d4a7517f910baf1.dl.dropboxusercontent.com/cd/0/get/CDEw_oQmScRT_RsnwuHPfbTOSPgFnMzvI6k12I3spmFRL6TG4V3WyQlGit0AZExPNNF0V9BakW9hiTf3i7MHg6elD5FCUFuukrTfnY1DEIo0PovLpJS2FJ0quocRtNJhpW1fR7lCZMMp08oOVLKdD_OhoXDV9D-fYM3pyKB3XrhbnGjA54Ub4hcUZq2uGS-0C6M/file">
+            <p>img3.png</p>
+        </div>
+        <div class="file">
+            <img src="https://ucb3f61986ebf2b821c1b25fa88d.dl.dropboxusercontent.com/cd/0/get/CDHSFGOkySqBVygeGWClcOoGm-8cAEVJ-KjdouQgQ6E4ttlP_XO97TxH-6jV3QZcBtEIzdEFEMRhRhsGsFrlZ9dIn7ExtoUMKeVcOYOf1EnuAfqc0RoGilUHCK-jxY-9sqHCxEhLJNeiUMOXDY7M2ZxQkaH-JfRDidBAagoekiRzFyDGx-Lm6VR0jPK0TeJRPgw/file">
+            <p>img4.png</p>
+        </div> -->
+    </div>
+
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jimp/0.22.10/jimp.min.js" integrity="sha512-I7QM5mEu+5AZVAE1kZqUs1gihBFmO7h0JF6sMh5kPCatn/J2PsdsCMCtZ3FNMbutSV9WK7CSGUDukY9+MggvLA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

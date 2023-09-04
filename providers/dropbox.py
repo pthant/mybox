@@ -1,6 +1,6 @@
 from dropbox import Dropbox, DropboxOAuth2FlowNoRedirect
 from dropbox.files import ListFolderResult, FolderMetadata, CommitInfo, WriteMode
-from dropbox.files import GetTemporaryLinkResult
+from dropbox.files import GetTemporaryLinkResult, GetTemporaryLinkResult
 
 from settings import Config
 
@@ -15,9 +15,14 @@ class DropboxClient:
         res: GetTemporaryLinkResult = self.__client.files_get_temporary_upload_link(commit_info)
         # print(f"{res=}")
         return res.link
+    
+    def get_view_presigned_url(self, key: str) -> str:
+        res: GetTemporaryLinkResult = self.__client.files_get_temporary_link(f"/{key}")
+        # print(f"{res=}")
+        return res.link
 
-    @staticmethod
-    def login(config: Config) -> str:
+    def login(self) -> str:
+        config = self.__config
         auth_flow = DropboxOAuth2FlowNoRedirect(
             config.DB_APP_KEY,
             config.DB_APP_SECRET,

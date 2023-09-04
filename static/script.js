@@ -21,6 +21,14 @@ async function uploadAck(id, file) {
     return res
 }
 
+async function listFiles() {
+    const res = await fetch(`${baseUrl}/folders/root/files`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    }).then(res => res.json())
+    return res
+}
+
 async function r2Upload(r2SignedUrl, file) {
     const res = await fetch(r2SignedUrl, {
         method: "PUT",
@@ -59,3 +67,22 @@ form.addEventListener('submit', async function (event) {
     let dbRes = await dbUpload(signedUrlRes["db_upload_url"], file)
     let ackRes = await uploadAck(signedUrlRes["id"], file)
 })
+
+let grid = document.getElementById("grid")
+
+async function showHandler() {
+    data = await listFiles()
+    data.forEach((item) => {
+        img = document.createElement("img")
+        img.src = item["url"]
+        filename = document.createElement("p")
+        filename.innerHTML = item["display_name"]
+
+        child = document.createElement("div")
+        child.classList.add("file")
+        child.appendChild(img)
+        child.appendChild(filename)
+
+        grid.appendChild(child)
+    })
+}
