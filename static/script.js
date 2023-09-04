@@ -33,8 +33,8 @@ async function r2Upload(r2SignedUrl, file) {
 async function dbUpload(signedUrl, file) {
     thumbnail = await getThumbnailFile(file)
     const res = await fetch(signedUrl, {
-        method: "PUT",
-        headers: { "Content-Type": "image/png" },
+        method: "POST",
+        headers: { "Content-Type": "application/octet-stream" },
         body: thumbnail,
     })
     return res
