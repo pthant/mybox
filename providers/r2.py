@@ -27,3 +27,13 @@ class R2Client:
             },
             ExpiresIn=3600
         )
+
+    def get_view_presigned_url(self, key: str) -> str:
+        return self.__client.generate_presigned_url(
+            "get_object",
+            Params={
+                "Bucket": self.__config.R2_BUCKET,
+                "Key": key,
+            },
+            ExpiresIn=3600
+        )

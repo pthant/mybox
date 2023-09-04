@@ -40,6 +40,11 @@ def list_files(folder: str) -> list[FileMetadataWithUrl]:
         ))
     return res
 
+@app.get("/folders/{folder}/files/{file}")
+def get_file(file: str):
+    key = file
+    return { "url": r2.get_view_presigned_url(key) }
+
 
 app.mount("/", StaticFiles(directory="static"), name="static")
 

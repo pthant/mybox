@@ -29,6 +29,14 @@ async function listFiles() {
     return res
 }
 
+async function getFile(id) {
+    const res = await fetch(`${baseUrl}/folders/root/files/${id}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    }).then(res => res.json())
+    return res
+}
+
 async function r2Upload(r2SignedUrl, file) {
     const res = await fetch(r2SignedUrl, {
         method: "PUT",
@@ -82,7 +90,19 @@ async function showHandler() {
         child.classList.add("file")
         child.appendChild(img)
         child.appendChild(filename)
+        child.dataset.id = item["id"]
+        child.dataset.fileType = item["file_type"]
+        child.dataset.displayName = item["display_name"]
+        child.dataset.url = item["url"]
+        child.addEventListener("click", clickHandler)
 
         grid.appendChild(child)
     })
+}
+
+let view = document.getElementById("view_file")
+
+async function clickHandler() {
+    res = await getFile(this.dataset.id)
+    view.src = res["url"]
 }
